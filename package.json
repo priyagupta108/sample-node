@@ -4,13 +4,12 @@
   "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" "
+    "test": "echo \"Error: no test specified\" ",
+    "publish": "yarn npm publish"
   },
   "author": "",
   "license": "ISC",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/priya-kinthali"
-  },
+  
   "dependencies": {
     "express": "^4.18.2"
   },

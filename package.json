@@ -1,10 +1,12 @@
 {
   "name": "@priyagupta18/sample-node",
-  "version": "1.0.0",
+  "version": "4.0.2",
   "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" "
+    "test": "echo \"Error: no test specified\" ",
+    "postinstall": "echo 'postinstall script ran!'",
+    "publish": "yarn npm publish"
   },
   "author": "",
   "license": "ISC",

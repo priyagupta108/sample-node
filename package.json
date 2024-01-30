@@ -4,8 +4,7 @@
   "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" ",
-   
+    "test": "echo \"Error: no test specified\" "
   },
   "author": "",
   "license": "ISC",

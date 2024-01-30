@@ -6,16 +6,21 @@ on:
       - issue-942
 
 jobs:
-  build:
+  publish-gpr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '14.x'
-        registry-url: 'https://npm.pkg.github.com'
-    - run: yarn install --frozen-lockfile
-    - run: yarn publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        YARN_REGISTRY: 'https://npm.pkg.github.com'
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          registry-url: https://npm.pkg.github.com/
+      - run: yarn workspaces focus --all --production
+      - run: yarn npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          YARN_REGISTRY: 'https://npm.pkg.github.com'

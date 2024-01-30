@@ -1,14 +1,18 @@
 {
   "name": "@priyagupta108/sample-node",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" "
+    "test": "echo \"Error: no test specified\" ",
+    "postinstall": "echo 'postinstall script ran!'",
+    "publish": "yarn npm publish"
   },
   "author": "",
   "license": "ISC",
-  
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/priyagupta108"
+  },
   "dependencies": {
     "express": "^4.18.2"
   },

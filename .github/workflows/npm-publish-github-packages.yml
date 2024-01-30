@@ -19,9 +19,15 @@ jobs:
           node-version: 20
           cache: 'yarn'
           registry-url: https://npm.pkg.github.com/
-          scope: '@priyagupta108'
+
+      - name: Prepare NPM credentials
+        run: |
+           echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
+        env:
+           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       
       - run: yarn workspaces focus --all --production
       - run: yarn npm publish 
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          YARN_REGISTRY: 'https://npm.pkg.github.com'
+       

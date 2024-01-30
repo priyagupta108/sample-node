@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
-          registry-url: https://npm.pkg.github.com/
-
+          registry-url: https://npm.pkg.github.com
+          scope: '@priyagupta108'
       - name: Prepare NPM credentials
         run: |
            echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml

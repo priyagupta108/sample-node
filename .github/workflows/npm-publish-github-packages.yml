@@ -18,3 +18,4 @@ jobs:
     - run: yarn publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        YARN_REGISTRY: 'https://npm.pkg.github.com'

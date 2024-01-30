@@ -4,12 +4,12 @@
   "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-
     "test": "echo \"Error: no test specified\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "repository": "https://github.com/priyagupta108/sample-node.git"
 }

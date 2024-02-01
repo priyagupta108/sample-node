@@ -21,7 +21,11 @@ jobs:
         with:
           node-version: 20
           
-          
+      - name: "rate limit"
+        run: |
+          curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/rate_limit
+
+  
       - run: npm ci
       - run: npm test
 

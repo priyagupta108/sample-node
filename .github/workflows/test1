@@ -22,7 +22,7 @@ jobs:
          
         with:
           node-version: 20
-          architecture: arm64
+          
           
       - run: npm ci
       - run: npm test

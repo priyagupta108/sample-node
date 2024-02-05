@@ -1,12 +1,18 @@
 {
-  "name": "sample-node",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@priyagupta108/sample-node",
+  "version": "1.0.6",
+  "description": "sample-node application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" "
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": []
 }

@@ -1,22 +1,32 @@
-name: Node.js CI
+name: Node.js Package
 
 on:
   push:
-    branches: [ yarn-test ]
-
+    branches:
+      - yarn-test
 
 jobs:
-  build:
+  publish-gpr:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@v4
-    - uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
-      with:
-        node-version: '20'
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn test
-    - run: yarn publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
+        with:
+          node-version: 20
+          cache: 'yarn'
+          registry-url: https://npm.pkg.github.com
+          scope: '@priyagupta108'
+      - name: Prepare NPM credentials
+        run: |
+           echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
+        env:
+           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       
+      - run: yarn npm publish 
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+       

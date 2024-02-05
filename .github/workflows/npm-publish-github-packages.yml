@@ -9,16 +9,14 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: priyagupta108/setup-node@PR-927
       with:
         node-version: '20'
         cache: 'npm'
+        registry-url: https://npm.pkg.github.com
+
     - run: npm ci
     - run: npm run test
-    - name: Setup .npmrc file and publish
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-        npm install
-        npm publish --access public
-      env:
-       NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+    - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}

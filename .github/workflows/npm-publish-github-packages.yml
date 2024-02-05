@@ -2,9 +2,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ npm-test ]
+  
 
 jobs:
   build:
@@ -14,7 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
       with:
-        node-version: '16.x'
+        node-version: '20'
         cache: 'npm'
     - run: npm ci
     - run: npm run test

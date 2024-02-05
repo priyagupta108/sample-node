@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
-       with:
+      with:
         node-version: '16.x'
         cache: 'npm'
     - run: npm ci

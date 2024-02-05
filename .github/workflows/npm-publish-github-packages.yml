@@ -18,9 +18,9 @@ jobs:
     - run: npm ci
     - run: npm run test
     - name: Setup .npmrc file
-  run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-  env:
-    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+      env:
+       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-- name: Install dependencies and publish
-  run: npm install && npm publish
+    - name: Install dependencies and publish
+      run: npm install && npm publish

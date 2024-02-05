@@ -9,11 +9,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: priyagupta108/setup-node@PR-927
+    - uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'npm'
-    # - run: npm ci
+    - run: npm ci
     - run: npm run test
     - name: Setup .npmrc file and publish
       run: |

@@ -17,6 +17,10 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run test
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Setup .npmrc file
+  run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+- name: Install dependencies and publish
+  run: npm install && npm publish

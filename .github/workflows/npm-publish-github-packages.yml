@@ -16,7 +16,7 @@ jobs:
         version: latest
 
     - name: Setup Node.js
-      uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
+      uses: priyagupta108/setup-node@PR-927
       with:
         node-version: '20'
         cache: 'pnpm'

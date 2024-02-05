@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
-      - uses: dmitry-shibanov/setup-node@v-dmshib/fix-arm64-for-windows
+      - uses: priyagupta108/setup-node@PR-927
         with:
           node-version: 20
           cache: 'yarn'

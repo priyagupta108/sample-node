@@ -1,4 +1,4 @@
-name: Issue 995 Workflow
+name: Check .npmrc on Windows
 
 on:
   push:
@@ -7,10 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -24,20 +21,10 @@ jobs:
         scope: 'myscope'
       
     - name: Check .npmrc in specified path
-      run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then 
-          dir $Env:NPM_CONFIG_USERCONFIG
-        else 
-          ls -la $NPM_CONFIG_USERCONFIG
-        fi
-      shell: bash
+      run: dir $Env:NPM_CONFIG_USERCONFIG
+      shell: pwsh
 
     - name: Display .npmrc if exists
       if: success()
-      run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then 
-          cat $Env:NPM_CONFIG_USERCONFIG
-        else 
-          cat $NPM_CONFIG_USERCONFIG
-        fi
-      shell: bash
+      run: cat $Env:NPM_CONFIG_USERCONFIG
+      shell: pwsh

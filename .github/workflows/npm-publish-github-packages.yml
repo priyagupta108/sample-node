@@ -1,29 +1,28 @@
- name: Issue 995 Workflow
+name: Issue 995 Workflow
 
- on:
-   push:
-     branches:
-       - issue-995
+on:
+  push:
+    branches:
+      - issue-995
 
- jobs:
-   build:
-     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-     steps:
-     - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-     - name: Set up Node.js
-       uses: actions/setup-node@v4
-       env:
-         NODE_AUTH_TOKEN: "MyAuthToken"
-       with:
-         registry-url: 'https://my-repo.example.com/npm-private/'
-         scope: 'myscope'
-       
-     - name: Check .npmrc in expected path
-       run: ls -la /home/runner/.npmrc
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      env:
+        NODE_AUTH_TOKEN: "MyAuthToken"
+      with:
+        registry-url: 'https://my-repo.example.com/npm-private/'
+        scope: 'myscope'
+      
+    - name: Check .npmrc in specified path
+      run: ls -la $NPM_CONFIG_USERCONFIG
 
-     - name: Display .npmrc if exists
-       if: success()
-       run: cat /home/runner/.npmrc
- 
+    - name: Display .npmrc if exists
+      if: success()
+      run: cat $NPM_CONFIG_USERCONFIG

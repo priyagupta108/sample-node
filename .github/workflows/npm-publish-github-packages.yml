@@ -1,4 +1,4 @@
-name: Issue 995 Workflow
+ name: Issue 995 Workflow
 
  on:
    push:

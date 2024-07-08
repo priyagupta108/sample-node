@@ -1,5 +1,4 @@
-
- name: Issue 995 Workflow
+name: Issue 995 Workflow
 
  on:
    push:
@@ -11,7 +10,7 @@
      runs-on: ubuntu-latest
 
      steps:
-     - uses: actions/checkout@v4
+     - uses: actions/checkout@v2
 
      - name: Set up Node.js
        uses: actions/setup-node@v4
@@ -21,5 +20,10 @@
          registry-url: 'https://my-repo.example.com/npm-private/'
          scope: 'myscope'
        
-     - name: Display .npmrc
-       run: cat ~/.npmrc
+     - name: Check .npmrc in expected path
+       run: ls -la /home/runner/.npmrc
+
+     - name: Display .npmrc if exists
+       if: success()
+       run: cat /home/runner/.npmrc
+ 

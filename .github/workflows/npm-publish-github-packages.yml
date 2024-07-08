@@ -6,23 +6,20 @@ on:
       - issue-995
 
 jobs:
-  build:
+  check-npmrc-path:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      env:
-        NODE_AUTH_TOKEN: "MyAuthToken"
-      with:
-        registry-url: 'https://my-repo.example.com/npm-private/'
-        scope: 'myscope'
-      
-    - name: Check .npmrc in specified path
-      run: ls -la $NPM_CONFIG_USERCONFIG
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
 
-    - name: Display .npmrc if exists
-      if: success()
-      run: cat $NPM_CONFIG_USERCONFIG
+      - name: Echo RUNNER_TEMP
+        run: echo ${RUNNER_TEMP}
+
+      - name: List files in RUNNER_TEMP
+        run: ls -al ${RUNNER_TEMP}

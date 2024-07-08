@@ -25,17 +25,19 @@ jobs:
       
     - name: Check .npmrc in specified path
       run: |
-        if [[ "$RUNNER_OS" == "Windows" ]]; then 
-          Get-ChildItem -Path $Env:NPM_CONFIG_USERCONFIG
+        if [ "$RUNNER_OS" == "Windows" ]; then 
+          dir $Env:NPM_CONFIG_USERCONFIG
         else 
           ls -la $NPM_CONFIG_USERCONFIG
         fi
+      shell: bash
 
     - name: Display .npmrc if exists
       if: success()
       run: |
-        if [[ "$RUNNER_OS" == "Windows" ]]; then 
-          Get-Content $Env:NPM_CONFIG_USERCONFIG
+        if [ "$RUNNER_OS" == "Windows" ]; then 
+          cat $Env:NPM_CONFIG_USERCONFIG
         else 
           cat $NPM_CONFIG_USERCONFIG
         fi
+      shell: bash

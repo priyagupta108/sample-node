@@ -24,8 +24,18 @@ jobs:
         scope: 'myscope'
       
     - name: Check .npmrc in specified path
-      run: ls -la $NPM_CONFIG_USERCONFIG
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then 
+          Get-ChildItem -Path $Env:NPM_CONFIG_USERCONFIG
+        else 
+          ls -la $NPM_CONFIG_USERCONFIG
+        fi
 
     - name: Display .npmrc if exists
       if: success()
-      run: cat $NPM_CONFIG_USERCONFIG
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then 
+          Get-Content $Env:NPM_CONFIG_USERCONFIG
+        else 
+          cat $NPM_CONFIG_USERCONFIG
+        fi

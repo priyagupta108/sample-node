@@ -1,4 +1,2 @@
-# comment
-
-v18.19 # test comment
-
+#!/bin/node
+v14.17.0

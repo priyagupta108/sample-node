@@ -1,2 +1,2 @@
-#!/bin/node
-v14.17.0
+node
+npm=10

@@ -14,21 +14,13 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: priyagupta108/setup-node@PR-927
+
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
-          cache: 'yarn'
-          registry-url: https://npm.pkg.github.com
-          scope: '@priyagupta108'
-      - name: Prepare NPM credentials
-        run: |
-           echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
-        env:
-           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '20.16.0'
+          cache: 'npm'
+          
+      
        
-      - run: yarn install
-      - run: yarn npm publish 
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-       
+      - run: npm ci
+     

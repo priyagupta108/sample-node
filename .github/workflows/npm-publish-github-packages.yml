@@ -17,13 +17,13 @@ jobs:
         version: latest
 
     - name: Setup Node.js
-      uses: priyagupta108/setup-node@PR-927
+      uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'pnpm'
 
     - name: Install dependencies
-      run: pnpm install
+      run: pnpm install --frozen-lockfile
 
     - name: Test
       run: pnpm test

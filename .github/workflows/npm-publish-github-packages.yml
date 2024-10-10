@@ -28,7 +28,4 @@ jobs:
     - name: Test
       run: pnpm test
 
-    - name: Publish
-      run: echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc && pnpm publish --no-git-checks
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+   

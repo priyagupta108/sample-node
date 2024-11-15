@@ -1,31 +1,16 @@
-name: Node.js Package
+name: Print Tcl/Tk Version
 
-on:
-  push:
-    branches:
-      - pnpm-test
-      
+on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  print-tcl-version:
+    runs-on: macos-13
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v2
-      with:
-        version: latest
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
-
-    - name: Test
-      run: pnpm test
-
-   
+    - name: Print Tcl/Tk version
+      run: |
+        tclsh <<< 'puts [info patchlevel]'
+        wish <<< 'puts [info patchlevel]'

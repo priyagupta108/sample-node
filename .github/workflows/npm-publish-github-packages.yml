@@ -13,6 +13,8 @@ jobs:
       run: |
           echo 'puts [info patchlevel];exit 0' | tclsh
           echo 'puts $tcl_version;exit 0' | tclsh
+          echo 'puts [info patchlevel];exit 0' | tclsh
+          echo 'puts $tk_version;exit 0' | tclsh
 
     - name: Install Tcl/Tk 9.0.0
       run: |

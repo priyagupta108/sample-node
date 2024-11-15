@@ -10,10 +10,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Update Tcl/Tk to 9.0.0
+    - name: Install Tcl/Tk 9.0.0
       run: |
-        sudo apt-get update
-        sudo apt-get install -y tcl tk
+        brew update
+        brew install tcl-tk
 
     - name: Print Tcl/Tk version
       run: |

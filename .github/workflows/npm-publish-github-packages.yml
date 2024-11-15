@@ -9,19 +9,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    - name: Print Tcl/Tk Version
-        
+    - name: Print Tcl/Tk version
       run: |
-          echo "Tcl version: $(tclsh <<< 'puts [info patchlevel]')"
-          echo "Tk version: $(tclsh <<< 'package require Tk; puts $tk_version')"
+          tclsh --version
+          wish --version
 
     - name: Install Tcl/Tk 9.0.0
       run: |
         brew update
         brew install tcl-tk
 
-    - name: Print Tcl/Tk Version
-        
+    - name: Print Tcl/Tk version
       run: |
-          echo "Tcl version: $(tclsh <<< 'puts [info patchlevel]')"
-          echo "Tk version: $(tclsh <<< 'package require Tk; puts $tk_version')"
+          tclsh --version
+          wish --version

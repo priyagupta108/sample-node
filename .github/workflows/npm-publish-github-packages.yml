@@ -1,27 +1,24 @@
-name: Print Tcl/Tk Version
+name: Test
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+
+
 
 jobs:
-  print-tcl-version:
-    runs-on: macos-13
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 20, 18]
+        os: [windows-latest, macos-latest, ubuntu-latest, ubuntu-22.04-arm, ubuntu-24.04-arm]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    - name: Print Tcl/Tk version
-      run: |
-          echo 'puts [info patchlevel];exit 0' | tclsh
-          echo 'puts $tcl_version;exit 0' | tclsh
-          echo 'puts [info patchlevel];exit 0' | tclsh
-          echo 'puts $tk_version;exit 0' | tclsh
+      - uses: actions/checkout@v4
 
-    - name: Install Tcl/Tk 9.0.0
-      run: |
-        brew update
-        brew install tcl-tk
+      - name: Set up Python ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Print Tcl/Tk version
-      run: |
-          echo 'puts [info patchlevel];exit 0' | tclsh
-          echo 'puts $tcl_version;exit 0' | tclsh
+    

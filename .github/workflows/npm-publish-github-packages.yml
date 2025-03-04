@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          cache-dependency-path: ''  
+          node-version-file: ''  
           node-version: ${{ matrix.node-version }}
 
     

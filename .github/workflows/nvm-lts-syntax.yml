@@ -1,0 +1,29 @@
+name: NVM LTS syntax Test
+
+on:
+  push:
+    branches:
+      - pr-mirror-url
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest, macos-13]
+        node-version: ['lts/erbium', 'lts/fermium', 'lts/*', 'lts/-n']  
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: aparnajyothi-y/setup-node@add-mirror-url
+        with:
+          node-version: ${{ matrix.node-version }}
+          mirror-url: 'https://unofficial-builds.nodejs.org/download/release/'
+
+
+      - name: Verify Node.js Installation
+        run: |
+          node -v
+          npm -v

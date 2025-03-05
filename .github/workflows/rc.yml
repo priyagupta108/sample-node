@@ -1,0 +1,24 @@
+name: RC versions Test
+
+on:
+  push:
+    branches:
+      - pr-mirror-url
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest, macos-13]
+     
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aparnajyothi-y/setup-node@add-mirror-url
+        with:
+          node-version: '16.0.0-rc.1'
+          mirror-url: 'https://mirrors.dotsrc.org/nodejs/rc/'
+      - name: Verify Node.js installation
+        run: node -v    
+      - run: npm ci
+     

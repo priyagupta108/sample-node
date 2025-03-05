@@ -18,7 +18,7 @@ jobs:
       - uses: aparnajyothi-y/setup-node@add-mirror-url
         with:
           node-version: '20.18.1'
-          mirror-url: https://unofficial-builds.nodejs.org/download/release/v20.18.1/
+          mirror-url: 'https://unofficial-builds.nodejs.org/download/release/'
 
 
       - name: Verify Node.js installation

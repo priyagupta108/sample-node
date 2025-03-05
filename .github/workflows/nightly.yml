@@ -1,9 +1,10 @@
 name: Nightly versions Test
 
 on:
-  push:
-    branches:
-      - pr-mirror-url
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - pr-mirror-url
 
 jobs:
   test:

@@ -21,7 +21,7 @@ jobs:
         uses: aparnajyothi-y/setup-node@add-mirror-url
         with:
           node-version: ${{ matrix.node-version }}
-          mirror-url: 'http://mirrors.dotsrc.org/nodejs/release/'
+          mirror-url: 'https://unofficial-builds.nodejs.org/download/release/'
 
       - name: Verify Node.js Installation
         run: |

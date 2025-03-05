@@ -11,13 +11,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest, macos-13]
+        os: [ubuntu-latest, macos-latest, windows-latest, macos-13, ubuntu-24.04-arm]
      
     steps:
       - uses: actions/checkout@v4
       - uses: aparnajyothi-y/setup-node@add-mirror-url
         with:
-          node-version: '16.0.0-rc.1'
+          node-version: '22.0.0-rc.1'
           mirror-url: 'https://mirrors.dotsrc.org/nodejs/rc/'
       - name: Verify Node.js installation
         run: node -v    

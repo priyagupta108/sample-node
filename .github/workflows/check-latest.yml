@@ -22,5 +22,5 @@ jobs:
           check-latest: true
       - name: Verify Node.js installation
         run: node -v    
-      - run: npm ci
+      - run: npm i
      

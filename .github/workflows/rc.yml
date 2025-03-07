@@ -2,9 +2,9 @@ name: RC versions Test
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - pr-mirror-url
+  push:
+    branches:
+      - pr-mirror-url
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
      
     steps:
       - uses: actions/checkout@v4
-      - uses: aparnajyothi-y/setup-node@add-mirror-url
+      - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '22.0.0-rc.1'
           mirror-url: 'https://mirrors.dotsrc.org/nodejs/rc/'

@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: aparnajyothi-y/setup-node@add-mirror-url
+        uses: marco-ippolito/setup-node@mirror
         with:
           node-version: ${{ matrix.node-version }}
           mirror-url: 'https://nodejs.org/dist/'

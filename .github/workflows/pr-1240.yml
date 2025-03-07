@@ -4,9 +4,9 @@ name: Basic Functionality Test
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - pr-mirror-url
+  # push:
+  #   branches:
+  #     - pr-mirror-url
 
 jobs:
   test-basic:

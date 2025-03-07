@@ -21,7 +21,7 @@ jobs:
         uses: marco-ippolito/setup-node@mirror
         with:
           node-version: ${{ matrix.node-version }}
-          mirror: 'https://nodejs.org/dist/'
+          mirror: 'https://nodejs.org/dist/dist'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           
 

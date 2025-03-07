@@ -39,7 +39,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '21'
-          mirror: 'https://nodejs.org/dist/'
+          mirror: 'https://nodejs.org/dist/dist'
           check-latest: true
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           

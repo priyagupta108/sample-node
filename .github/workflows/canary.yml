@@ -19,7 +19,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '20.0.0-v8-canary'
-          mirror: 'https://mirrors.dotsrc.org/nodejs/v8-canary/'
+          mirror: 'https://mirrors.dotsrc.org/nodejs/v8-canary/download/v8-canary'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    
@@ -37,7 +37,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '23.0.0-v8-canary'
-          mirror: 'https://mirrors.dotsrc.org/nodejs/v8-canary/'
+          mirror: 'https://mirrors.dotsrc.org/nodejs/v8-canary/download/v8-canary'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    

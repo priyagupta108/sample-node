@@ -19,7 +19,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: marco-ippolito/setup-node@mirror
+        # uses: marco-ippolito/setup-node@mirror
+        uses: aparnajyothi-y/setup-node@add-mirror-url
         with:
           node-version: ${{ matrix.node-version }}
           mirror: 'https://nodejs.org/download/release/'

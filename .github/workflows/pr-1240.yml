@@ -53,7 +53,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: 22.0.0-rc.1
-          mirror: 'https://mirrors.dotsrc.org/nodejs/rc//v22.0.0-rc.1/node-v22.0.0-rc.1-linux-x64.tar.gz'
+          mirror: 'https://nodejs.org/download/rc/v22.0.0-rc.1/node-v22.0.0-rc.1-linux-s390x.tar.gz'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v  

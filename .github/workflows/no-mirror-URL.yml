@@ -24,3 +24,19 @@ jobs:
         run: node -v    
       - run: npm i
      
+  test-non-lts:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest, macos-13, ubuntu-24.04-arm]
+     
+    steps:
+      - uses: actions/checkout@v4
+      - uses: marco-ippolito/setup-node@mirror
+        with:
+          node-version: '23'
+          mirror-url: ' '
+      - name: Verify Node.js installation
+        run: node -v    
+      - run: npm i

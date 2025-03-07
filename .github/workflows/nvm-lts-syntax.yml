@@ -23,7 +23,7 @@ jobs:
         uses: aparnajyothi-y/setup-node@add-mirror-url
         with:
           node-version: ${{ matrix.node-version }}
-          mirror: 'https://nodejs.org/download/release/'
+          mirror-url: 'https://nodejs.org/download/release/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           
 

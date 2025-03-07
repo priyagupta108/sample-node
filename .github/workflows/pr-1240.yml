@@ -1,0 +1,59 @@
+
+
+name: Basic Functionality Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - pr-mirror-url
+
+jobs:
+  test-basic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: marco-ippolito/setup-node@mirror
+        with:
+          node-version: '22'
+          mirror: 'https://nodejs.org/dist//v22.14.0/node-v22.14.0-linux-x64.tar.gz'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Verify Node.js installation
+        run: node -v    
+     
+  test-canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: marco-ippolito/setup-node@mirror
+        with:
+          node-version: '22'
+          mirror: 'https://mirrors.dotsrc.org/nodejs/v8-canary//v20.0.0-v8-canary2023041819be670741/node-v20.0.0-v8-canary2023041819be670741-linux-x64.tar.gz'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Verify Node.js installation
+        run: node -v   
+
+  test-nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: marco-ippolito/setup-node@mirror
+        with:
+          node-version: 16-nightly  
+          mirror: 'https://mirrors.dotsrc.org/nodejs/nightly//v16.0.0-nightly20210420a0261d231c/node-v16.0.0-nightly20210420a0261d231c-linux-x64.tar.gz'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Verify Node.js installation
+        run: node -v  
+
+
+  test-rc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: marco-ippolito/setup-node@mirror
+        with:
+          node-version: 22.0.0-rc.1
+          mirror: 'https://mirrors.dotsrc.org/nodejs/rc//v22.0.0-rc.1/node-v22.0.0-rc.1-linux-x64.tar.gz'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Verify Node.js installation
+        run: node -v  

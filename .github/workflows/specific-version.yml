@@ -2,9 +2,9 @@ name: With Specific Node Version
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - pr-mirror-url
+  # push:
+  #   branches:
+  #     - pr-mirror-url
 
 jobs:
   test:

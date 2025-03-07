@@ -2,9 +2,9 @@ name: Matrix Test
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - pr-mirror-url
+  # push:
+  #   branches:
+  #     - pr-mirror-url
 
 jobs:
   test:

@@ -19,7 +19,8 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '16-nightly'
-          mirror-url: 'https://mirrors.dotsrc.org/nodejs/nightly/'
+          mirror: 'https://mirrors.dotsrc.org/nodejs/nightly/'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    
       - run: npm i
@@ -36,7 +37,8 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '17-nightly'
-          mirror-url: 'https://mirrors.dotsrc.org/nodejs/nightly/'
+          mirror: 'https://mirrors.dotsrc.org/nodejs/nightly/'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    
       - run: npm i

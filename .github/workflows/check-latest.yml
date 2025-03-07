@@ -19,8 +19,10 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '18'
-          mirror-url: 'https://nodejs.org/dist/'
+          mirror: 'https://nodejs.org/dist/'
           check-latest: true
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+
       - name: Verify Node.js installation
         run: node -v    
       - run: npm i
@@ -37,8 +39,10 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '21'
-          mirror-url: 'https://nodejs.org/dist/'
+          mirror: 'https://nodejs.org/dist/'
           check-latest: true
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+          
       - name: Verify Node.js installation
         run: node -v    
       - run: npm i

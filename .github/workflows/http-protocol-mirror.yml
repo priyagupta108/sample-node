@@ -18,7 +18,9 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '20'
-          mirror-url: 'http://mirrors.dotsrc.org/nodejs/release/'
+          mirror: 'http://mirrors.dotsrc.org/nodejs/release/'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+          
       - name: Verify Node.js installation
         run: node -v   
       - run: npm i
@@ -35,7 +37,9 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '19'
-          mirror-url: 'http://mirrors.dotsrc.org/nodejs/release/'
+          mirror: 'http://mirrors.dotsrc.org/nodejs/release/'
+          mirror-token: ${{secrets.GITHUB_TOKEN}}
+
       - name: Verify Node.js installation
         run: node -v   
       - run: npm i

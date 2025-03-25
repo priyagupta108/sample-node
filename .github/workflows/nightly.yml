@@ -19,7 +19,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '16-nightly'
-          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
+          mirror: 'https://nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    
@@ -37,7 +37,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '17-nightly'
-          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
+          mirror: 'https://nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    

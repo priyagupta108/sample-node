@@ -4,9 +4,9 @@ name: Basic Functionality Test
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - pr-mirror-url
+  push:
+    branches:
+      - pr-test-1240-mirror
 
 jobs:
   test-basic:
@@ -16,7 +16,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '22.12.0'
-          mirror: 'https://nodejs.org/dist//v22.12.0/node-v22.12.0-linux-x64.tar.gz'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v    
@@ -28,7 +28,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '20.0.0-v8-canary'
-          mirror: 'https://nodejs.org/download/v8-canary/v20.0.0-v8-canary2023041819be670741/node-v20.0.0-v8-canary2023041819be670741-linux-x64.tar.gz'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v   
@@ -40,7 +40,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: 16-nightly  
-          mirror: 'https://nodejs.org/download/nightly/v16.0.0-nightly20210420a0261d231c/node-v16.0.0-nightly20210420a0261d231c-linux-x64.tar.gz'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v  
@@ -53,7 +53,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: 22.0.0-rc.1
-          mirror: 'https://nodejs.org/download/rc/v22.0.0-rc.1/node-v22.0.0-rc.1-linux-s390x.tar.gz'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
       - name: Verify Node.js installation
         run: node -v  

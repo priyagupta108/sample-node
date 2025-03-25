@@ -2,9 +2,9 @@ name: Matrix Test
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - pr-mirror-url
+  push:
+    branches:
+      - pr-test-1240-mirror
 
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
         uses: marco-ippolito/setup-node@mirror
         with:
           node-version: ${{ matrix.node-version }}
-          mirror: 'https://mirrors.dotsrc.org/nodejs/release/'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
 
       - name: Verify Node.js Installation

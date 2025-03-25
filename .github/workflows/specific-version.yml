@@ -2,9 +2,9 @@ name: With Specific Node Version
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - pr-mirror-url
+  push:
+    branches:
+      - pr-test-1240-mirror
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '20.18.1'
-          mirror: 'https://nodejs.org/dist/'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           
       - name: Verify Node.js installation
@@ -38,7 +38,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '23.8.0'
-          mirror: 'https://nodejs.org/dist/'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
 
       - name: Verify Node.js installation

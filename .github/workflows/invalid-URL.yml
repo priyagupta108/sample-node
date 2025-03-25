@@ -2,9 +2,9 @@ name: Test with Invalid URL
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - pr-mirror-url
+  push:
+    branches:
+      - pr-test-1240-mirror
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '16'
-          mirror: 'https://invalid-url.com/node'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
 
       - name: Verify Node.js installation
@@ -38,7 +38,7 @@ jobs:
       - uses: marco-ippolito/setup-node@mirror
         with:
           node-version: '17'
-          mirror: 'https://invalid-url.com/node'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           
       - name: Verify Node.js installation

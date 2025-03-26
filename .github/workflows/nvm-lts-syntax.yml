@@ -22,7 +22,7 @@ jobs:
         uses: marco-ippolito/setup-node@mirror
         with:
           node-version: ${{ matrix.node-version }}
-          mirror-url: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
+          mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
           mirror-token: ${{secrets.GITHUB_TOKEN}}
           
 

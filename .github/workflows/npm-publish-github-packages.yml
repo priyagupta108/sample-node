@@ -6,17 +6,21 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, macos-latest, macos-13]
+      
+    runs-on: ${{matrix.runner}}
     steps:
     - uses: actions/checkout@v4
-    - uses: priyagupta108/setup-node@PR-927
+    - uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
         cache: 'npm'
-        registry-url: https://npm.pkg.github.com
+        # registry-url: https://npm.pkg.github.com
 
     - run: npm ci
     - run: npm run test
-    - run: npm publish
-      env:
-          NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
+    # - run: npm publish
+    #   env:
+    #       NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}

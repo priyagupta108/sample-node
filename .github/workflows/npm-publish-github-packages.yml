@@ -11,10 +11,7 @@ jobs:
      fail-fast: false
      matrix:
         runner: [ubuntu-24.04-arm, ubuntu-latest, macos-latest, macos-13, windows-latest, windows-11-arm]
-        node: ['18','20', '22', '24']
-        exclude:
-          - runner: windows-11-arm
-            node: '18'
+        
       
     runs-on: ${{matrix.runner}}
     permissions:
@@ -25,7 +22,7 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{matrix.node}}
+          node-version: 24
           cache: 'yarn'
           # registry-url: https://npm.pkg.github.com
           # scope: '@priyagupta108'

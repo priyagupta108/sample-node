@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         runner: [ubuntu-22.04-arm, ubuntu-24.04-arm, ubuntu-latest, macos-latest, macos-13, windows-latest windows-11-arm]
-        node: ['18','20', '22', '24']
+        node: ['18','20', '22','24']
       
     runs-on: ${{matrix.runner}}
 

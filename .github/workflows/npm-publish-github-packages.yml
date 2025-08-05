@@ -18,15 +18,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v2
+    
+    - uses: pnpm/action-setup@v4
       with:
-        version: 6.32.9
+        version: latest
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '22'
-        # cache: 'pnpm'
+        mirror: 'https://mirror.yandex.ru/mirrors/nodejs.org/'
+        mirror-token: ${{secrets.GITHUB_TOKEN}}
+    #     cache: 'pnpm'
 
     # - name: Install dependencies
     #   run: pnpm install

@@ -5,13 +5,36 @@ on:
   - push
 
 jobs:
-  Lint:
-    runs-on: self-hosted
+  quality:
+
+
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
-          # node-version: 18.x
-      - run: npm ci
+          node-version: "12.x"
+
+      - name: Cache node modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Prettier
+        run: npm run fmt:check
+
+      - name: ESlint
+        run: npm run eslint:github-action
    

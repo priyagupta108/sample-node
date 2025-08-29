@@ -23,11 +23,8 @@
     "prettier": "^3.6.2",
     "serverless": "^3.40.0",
     "serverless-dynamodb-local": "^0.2.40",
-    "serverless-offline": "^14.4.0",
+    "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^2.1.5",
     "typescript": "^5.9.2"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

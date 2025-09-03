@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint functions/**.ts",
     "eslint:github-action": "eslint functions/**",
-    "fmt": "prettier --write ./**.{json,js,ts,yml,md}",
+    "fmt": "prettier --write ./**/*.{json,js,ts,yml,md}",
     "fmt:check": "prettier --check ./**.{json,js,ts,yml,md}"
   },
   "author": "",

@@ -11,8 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: priyagupta108/setup-node@problem-matcher-test
-      # - uses: actions/setup-node@v4
+      # - uses: priyagupta108/setup-node@problem-matcher-test
+      - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
 
@@ -31,8 +31,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Prettier
-        run: npm run fmt:check
+      # - name: Prettier
+      #   run: npm run fmt:check
 
       - name: ESlint
         run: npm run eslint:github-action

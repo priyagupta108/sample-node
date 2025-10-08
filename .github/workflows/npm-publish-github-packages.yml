@@ -8,9 +8,10 @@ jobs:
   quality:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node: [lts/iron, lts/jod, 'lts/*', 'lts/-n']
+        node: [lts/iron, lts/jod]
 
     steps:
       - uses: actions/checkout@v5

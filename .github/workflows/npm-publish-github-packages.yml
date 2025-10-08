@@ -1,27 +1,32 @@
 name: Test
 
 on:
-  - pull_request
-  - push
+  pull_request:
+  push:
 
 jobs:
   quality:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [lts/iron, lts/jod, 'lts/*', 'lts/-n']
 
     steps:
       - uses: actions/checkout@v5
-      - uses: priyagupta108/setup-node@eslint-update
-      # - uses: actions/setup-node@v4
-        with:
-          node-version: "22.x"
 
-      
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Install Dependencies
         run: npm ci
 
-      # # - name: Prettier
-      # #   run: npm run fmt:check
+      # Example: uncomment if you want to use Prettier
+      # - name: Prettier
+      #   run: npm run fmt:check
 
+      # Example: uncomment if you want to use ESLint
       # - name: ESlint
       #   run: npm run eslint:github-action

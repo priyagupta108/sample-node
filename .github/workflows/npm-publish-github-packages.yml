@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       # - uses: actions/setup-node@v4
-      - uses: priyagupta108/setup-node@ctest-hashFiles
+      - uses: priyagupta108/setup-node@test-hashFiles
         with:
           node-version: 22
           cache: 'npm'

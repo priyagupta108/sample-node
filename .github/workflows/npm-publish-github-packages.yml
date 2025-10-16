@@ -5,13 +5,13 @@ on:
       - npm-cache-test
 jobs:
   
-  publish-npm:
+  cache-npm:
     
-    runs-on: windows-latest
+    runs-on: Ubuntu -latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # - uses: actions/setup-node@v4
-      - uses: gowridurgad/setup-node@cache-upgrade
+      - uses: priyagupta108/setup-node@ctest-hashFiles
         with:
           node-version: 22
           cache: 'npm'

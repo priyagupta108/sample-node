@@ -17,23 +17,39 @@ jobs:
     permissions:
       contents: read
       packages: write
+    # steps:
+    #   - uses: actions/checkout@v5
+    #   - run: corepack enable
+    #   - uses: actions/setup-node@v6
+    #     with:
+    #       node-version: 22
+    #       cache: 'yarn'
+    #       # registry-url: https://npm.pkg.github.com
+    #       # scope: '@priyagupta108'
+    #   # - name: Prepare NPM credentials
+    #   #   run: |
+    #   #      echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
+    #   #   env:
+    #   #      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       
+    #   - run: yarn install
+    #   # - run: yarn npm publish 
+    #   #   env:
+    #   #     NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'yarn'
-          # registry-url: https://npm.pkg.github.com
-          # scope: '@priyagupta108'
-      # - name: Prepare NPM credentials
-      #   run: |
-      #      echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
-      #   env:
-      #      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       
-      - run: yarn install
-      # - run: yarn npm publish 
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-       
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v6
+      with:
+        node-version: '24.x'
+        registry-url: 'https://registry.npmjs.org' # publish to npmjs
+    - run: yarn install --frozen-lockfile
+    - run: yarn publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
+    - uses: actions/setup-node@v6
+      with:
+        registry-url: 'https://npm.pkg.github.com' # switch to GitHub Packages
+    - run: yarn publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           

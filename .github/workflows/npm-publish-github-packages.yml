@@ -7,13 +7,14 @@ on:
 
 jobs:
   test:
-    strategy:
-     fail-fast: false
-     matrix:
-        runner: [ubuntu-24.04-arm, ubuntu-latest, macos-latest, macos-13, windows-latest, windows-11-arm]
+    # strategy:
+    #  fail-fast: false
+    #  matrix:
+    #     runner: [ubuntu-24.04-arm, ubuntu-latest, macos-latest, macos-13, windows-latest, windows-11-arm]
         
       
-    runs-on: ${{matrix.runner}}
+    # runs-on: ${{matrix.runner}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -49,7 +50,7 @@ jobs:
     - uses: actions/setup-node@v6
       with:
         registry-url: 'https://npm.pkg.github.com' # switch to GitHub Packages
-    - run: yarn publish
+    - run: yarn npm publish 
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            

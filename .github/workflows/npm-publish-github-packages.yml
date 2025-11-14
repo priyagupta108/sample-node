@@ -45,6 +45,7 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org/'
+          always-auth: true
 
       - name: Install the latest version of the npm CLI
         run: |

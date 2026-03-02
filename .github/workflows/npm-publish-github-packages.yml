@@ -38,8 +38,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-      - name: Enable Corepack
-        run: corepack enable
+      # - name: Enable Corepack
+      #   run: corepack enable
       - name: Install Node.js
         uses: actions/setup-node@v6
         # uses: priyagupta108/setup-node@remove-always-auth-log

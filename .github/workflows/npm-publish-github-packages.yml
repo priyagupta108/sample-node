@@ -37,15 +37,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Node.js
-        # uses: actions/setup-node@v6
-        uses: priyagupta108/setup-node@remove-always-auth-log
+        uses: actions/setup-node@v6
+        # uses: priyagupta108/setup-node@remove-always-auth-log
         with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org/'
-          always-auth: true
+          node-version: '14'
+          
 
 
       - name: Install the latest version of the npm CLI

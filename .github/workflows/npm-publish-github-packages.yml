@@ -31,7 +31,7 @@
 #         env:
 #           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
        
-name: CI (Node 14)
+name: CI 
 
 on:
   push:
@@ -43,15 +43,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Yarn
-        run: npm install -g yarn
+        uses: actions/checkout@v6
         
-      - name: Setup Node.js (14.x)
+      - name: Enable Corepack
+        run: corepack enable
+        
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: .node-version
+          node-version: 14.x
           cache: "yarn"
 
       - name: Verify Node/Yarn

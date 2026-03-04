@@ -45,8 +45,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Install Yarn (classic)
-      #   run: npm i -g yarn@1
+      - name: Install Yarn (classic)
+        run: npm i -g yarn@1
         
       - name: Setup Node.js (14.x)
         uses: actions/setup-node@v6

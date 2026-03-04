@@ -105,8 +105,9 @@ jobs:
       - name: Checkout toolkit branch
         uses: actions/checkout@v4
         with:
-          repository: priyagupta108/toolkit
-          ref: hashFiles-extended-options-feedback
+          repository: actions/toolkit
+          ref: main
+          # ref: hashFiles-extended-options-feedback
           path: toolkit
           fetch-depth: 0
 

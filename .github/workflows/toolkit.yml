@@ -145,7 +145,7 @@ jobs:
           echo "OUT" > "$RUNNER_TEMP/hashfiles-test/outside/fileOut.txt"
           echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
           echo "RUNNER_TEMP=$RUNNER_TEMP"
-          ls -la "$RUNNER_TEMP/hashfiles-test/a"
+          ls -la "$RUNNER_TEMP/hashfiles-test/outside"
           ls -la "$RUNNER_TEMP/hashfiles-test/outside"
           cat > ./check-hash-main.mjs <<'EOF'
           const glob = await import('./packages/glob/lib/glob.js');

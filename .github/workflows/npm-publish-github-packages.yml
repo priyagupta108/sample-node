@@ -38,8 +38,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-      - name: Enable Corepack
-        run: corepack enable
+      # - name: Enable Corepack
+      #   run: corepack enable
+      - name: Install Yarn (classic)
+        run: npm i -g yarn@1
       - name: Install Node.js
         uses: actions/setup-node@v6
         # uses: priyagupta108/setup-node@remove-always-auth-log

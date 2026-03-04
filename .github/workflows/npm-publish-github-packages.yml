@@ -1,33 +1,65 @@
-name: Node.js Package
+# name: Node.js Package
+
+# on:
+#   push:
+#     branches:
+#       - yarn-test
+
+# jobs:
+#   publish-gpr:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       packages: write
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: corepack enable
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: 'yarn'
+#           registry-url: https://npm.pkg.github.com
+#           scope: '@priyagupta108'
+#       - name: Prepare NPM credentials
+#         run: |
+#            echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
+#         env:
+#            NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       
+#       - run: yarn workspaces focus --all --production
+#       - run: yarn npm publish 
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+       
+name: CI (Node 14)
 
 on:
   push:
-    branches:
-      - yarn-test
+  pull_request:
 
 jobs:
-  publish-gpr:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+
     steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Yarn (classic)
+        run: npm i -g yarn@1
+        
+      - name: Setup Node.js (14.x)
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
-          cache: 'yarn'
-          registry-url: https://npm.pkg.github.com
-          scope: '@priyagupta108'
-      - name: Prepare NPM credentials
+          node-version-file: .node-version
+          cache: "yarn"
+
+      - name: Verify Node/Yarn
         run: |
-           echo npmAuthToken: "$NODE_AUTH_TOKEN" >> ./.yarnrc.yml
-        env:
-           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       
-      - run: yarn workspaces focus --all --production
-      - run: yarn npm publish 
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-       
+          node --version
+          yarn --version
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+    

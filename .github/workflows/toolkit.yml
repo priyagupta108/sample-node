@@ -149,8 +149,8 @@ jobs:
           ls -la "$RUNNER_TEMP/hashfiles-test/outside"
           cat > ./check-hash-main.mjs <<'EOF'
           const glob = await import('./packages/glob/lib/glob.js');
-          const base = process.env.RUNNER_TEMP + '/hashfiles-test';
-          const rootA = base + '/a';
+          const base = process.env.RUNNER_TEMP + '/hashfiles-test/outside';
+          const rootA = base + '/outside';
           const outside = base + '/outside';
           const patterns = `${rootA}/*\n${outside}/*`;
           console.log('base:', base);

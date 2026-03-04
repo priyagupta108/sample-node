@@ -158,6 +158,16 @@ jobs:
           console.log('outside:', outside);
           console.log('patterns:', JSON.stringify(patterns));
           // Main branch behavior: outside-workspace matches are skipped, no throw.
+          let threw = false;
+          try {
+            await glob.hashFiles(patterns, '');
+          } catch (e) {
+            threw = true;
+            console.log(
+              'no-options threw as expected:',
+              (e && e.message) ? e.message.split('\n')[0] : String(e)
+            );
+          }
           const h = await glob.hashFiles(patterns, '');
           console.log('hash:', JSON.stringify(h));
           if (h !== '') {

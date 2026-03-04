@@ -93,7 +93,87 @@
 #           EOF_NODE
 #           node ./check-exclude-node-modules.mjs
 
-name: Test Cases with Priya's Branch
+# name: Test Cases with Priya's Branch
+
+# on:
+#   workflow_dispatch:
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout toolkit branch
+#         uses: actions/checkout@v4
+#         with:
+#           repository: actions/toolkit
+#           ref: main
+#           # ref: hashFiles-extended-options-feedback
+#           path: toolkit
+#           fetch-depth: 0
+
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: npm
+#           cache-dependency-path: toolkit/package-lock.json
+
+#       - name: Install root dependencies
+#         working-directory: toolkit
+#         run: npm ci
+
+#       - name: Lerna bootstrap (link local packages + install per-package deps)
+#         working-directory: toolkit
+#         run: npx lerna bootstrap --ci
+
+#       - name: Build
+#         working-directory: toolkit
+#         run: npm run build
+
+#       - name: Test (Jest from root, glob only)
+#         working-directory: toolkit
+#         run: npx jest packages/glob --runInBand
+
+#       - name: Functional check @actions/glob hashFiles outside workspace (no options)
+#         working-directory: toolkit
+#         shell: bash
+#         run: |
+#           set -euo pipefail
+#           mkdir -p "$RUNNER_TEMP/hashfiles-test/a" "$RUNNER_TEMP/hashfiles-test/outside"
+#           echo "A" > "$RUNNER_TEMP/hashfiles-test/a/fileA.txt"
+#           echo "OUT" > "$RUNNER_TEMP/hashfiles-test/outside/fileOut.txt"
+#           echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
+#           echo "RUNNER_TEMP=$RUNNER_TEMP"
+#           ls -la "$RUNNER_TEMP/hashfiles-test/a"
+#           ls -la "$RUNNER_TEMP/hashfiles-test/outside"
+#           cat > ./check-hash.mjs <<'EOF'
+#           const glob = await import('./packages/glob/lib/glob.js');
+#           const base = process.env.RUNNER_TEMP + '/hashfiles-test';
+#           const rootA = base + '/a';
+#           const outside = base + '/outside';
+#           const patterns = `${rootA}/*\n${outside}/*`;
+#           console.log('base:', base);
+#           console.log('rootA:', rootA);
+#           console.log('outside:', outside);
+#           console.log('patterns:', JSON.stringify(patterns));
+#           // No options: roots defaults to [GITHUB_WORKSPACE] (since currentWorkspace = '')
+#           // With patterns pointing to RUNNER_TEMP (outside GITHUB_WORKSPACE), this should throw on Priya's branch.
+#           let threw = false;
+#           try {
+#             await glob.hashFiles(patterns, '');
+#           } catch (e) {
+#             threw = true;
+#             console.log(
+#               'no-options threw as expected:',
+#               (e && e.message) ? e.message.split('\n')[0] : String(e)
+#             );
+#           }
+#           if (!threw) {
+#             throw new Error('Expected hashFiles(patterns, \'\') to throw with no options when patterns include files outside GITHUB_WORKSPACE.');
+#           }
+#           EOF
+#           node ./check-hash.mjs
+name: toolkit-branch-optin
 
 on:
   workflow_dispatch:
@@ -101,15 +181,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout toolkit branch
-        uses: actions/checkout@v4
+      - name: Checkout toolkit (main)
+        uses: actions/checkout@v6
         with:
-          repository: actions/toolkit
-          ref: main
-          # ref: hashFiles-extended-options-feedback
+          repository: priyagupta108/toolkit
+          ref: hashFiles-extended-options-feedback
           path: toolkit
           fetch-depth: 0
+
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -134,7 +215,7 @@ jobs:
         working-directory: toolkit
         run: npx jest packages/glob --runInBand
 
-      - name: Functional check @actions/glob hashFiles outside workspace (no options)
+      - name: Functional check @actions/glob hashFiles outside workspace (main branch skips, no throw)
         working-directory: toolkit
         shell: bash
         run: |
@@ -146,7 +227,7 @@ jobs:
           echo "RUNNER_TEMP=$RUNNER_TEMP"
           ls -la "$RUNNER_TEMP/hashfiles-test/a"
           ls -la "$RUNNER_TEMP/hashfiles-test/outside"
-          cat > ./check-hash.mjs <<'EOF'
+          cat > ./check-hash-main.mjs <<'EOF'
           const glob = await import('./packages/glob/lib/glob.js');
           const base = process.env.RUNNER_TEMP + '/hashfiles-test';
           const rootA = base + '/a';
@@ -156,20 +237,11 @@ jobs:
           console.log('rootA:', rootA);
           console.log('outside:', outside);
           console.log('patterns:', JSON.stringify(patterns));
-          // No options: roots defaults to [GITHUB_WORKSPACE] (since currentWorkspace = '')
-          // With patterns pointing to RUNNER_TEMP (outside GITHUB_WORKSPACE), this should throw on Priya's branch.
-          let threw = false;
-          try {
-            await glob.hashFiles(patterns, '');
-          } catch (e) {
-            threw = true;
-            console.log(
-              'no-options threw as expected:',
-              (e && e.message) ? e.message.split('\n')[0] : String(e)
-            );
-          }
-          if (!threw) {
-            throw new Error('Expected hashFiles(patterns, \'\') to throw with no options when patterns include files outside GITHUB_WORKSPACE.');
+          // Main branch behavior: outside-workspace matches are skipped, no throw.
+          const h = await glob.hashFiles(patterns, '');
+          console.log('hash:', JSON.stringify(h));
+          if (h !== '') {
+            throw new Error(`Expected empty hash on main when patterns are outside GITHUB_WORKSPACE, got: ${h}`);
           }
           EOF
-          node ./check-hash.mjs
+          node ./check-hash-main.mjs

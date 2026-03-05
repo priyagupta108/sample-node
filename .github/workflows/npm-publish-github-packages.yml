@@ -45,8 +45,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         
-      # - name: Enable Corepack
-      #   run: corepack enable
+      - name: Enable Corepack
+        run: corepack enable
         
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -54,12 +54,12 @@ jobs:
           node-version: 14.x
           cache: "yarn"
 
-      # - name: Verify Node/Yarn
-      #   run: |
-      #     node --version
-      #     yarn --version
+      - name: Verify Node/Yarn
+        run: |
+          node --version
+          yarn --version
 
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install --immutable
 
     

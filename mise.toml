@@ -2,5 +2,11 @@
 # node = "20"
 
 # Object format
+# [tools]
+# node = { version = "22" }
+
+# With other tools (should still extract node)
 [tools]
-node = { version = "22" }
+go = "latest"
+node = "20.11"
+python = "3.12"

@@ -1,2 +1,6 @@
+# [tools]
+# node = "20"
+
+# Object format
 [tools]
-node = "20"
+node = { version = "22" }

@@ -18,7 +18,7 @@ jobs:
           cat $NPM_CONFIG_USERCONFIG
           echo ""
           echo "=== local .npmrc ==="
-          cat .npmrc
+          cat .npmrc 2>/dev/null || echo "No local .npmrc found"
           echo ""
           echo "=== npm config get registry ==="
           npm config get registry

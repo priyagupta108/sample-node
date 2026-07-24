@@ -1,0 +1,31 @@
+name: Reproduce npmrc issue
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+
+      - name: Debug - check config
+        run: |
+          echo "=== NPM_CONFIG_USERCONFIG ==="
+          cat $NPM_CONFIG_USERCONFIG
+          echo ""
+          echo "=== local .npmrc ==="
+          cat .npmrc
+          echo ""
+          echo "=== npm config get registry ==="
+          npm config get registry
+        working-directory: frontend
+
+      - name: Install (this will fail)
+        run: npm install
+        working-directory: frontend
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

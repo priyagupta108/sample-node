@@ -1,6 +1,5 @@
 name: Reproduce npmrc issue
 on: push
-
 jobs:
   test:
     runs-on: ubuntu-latest

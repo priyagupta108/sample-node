@@ -10,6 +10,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
+          scope: '@priyagupta18'          # ← matches your package.json name
 
       - name: Debug - check config
         run: |
@@ -19,11 +20,14 @@ jobs:
           echo "=== local .npmrc ==="
           cat .npmrc 2>/dev/null || echo "No local .npmrc found"
           echo ""
-          echo "=== npm config get registry ==="
+          echo "=== default registry (expected: npmjs.org) ==="
           npm config get registry
+          echo ""
+          echo "=== scoped registry (expected: npm.pkg.github.com) ==="
+          npm config get @priyagupta18:registry
         working-directory: frontend
 
-      - name: Install (this will fail)
+      - name: Install
         run: npm install
         working-directory: frontend
         env:

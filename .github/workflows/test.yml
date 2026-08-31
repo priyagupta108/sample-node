@@ -1,3 +1,39 @@
+# name: Reproduce npmrc issue
+# on: push
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v7
+
+#       - uses: actions/setup-node@v7
+#         with:
+#           node-version: 24
+#           registry-url: https://npm.pkg.github.com
+#           scope: '@priyagupta18'          # ← matches your package.json name
+
+#       - name: Debug - check config
+#         run: |
+#           echo "=== NPM_CONFIG_USERCONFIG ==="
+#           cat $NPM_CONFIG_USERCONFIG
+#           echo ""
+#           echo "=== local .npmrc ==="
+#           cat .npmrc 2>/dev/null || echo "No local .npmrc found"
+#           echo ""
+#           echo "=== default registry (expected: npmjs.org) ==="
+#           npm config get registry
+#           echo ""
+#           echo "=== scoped registry (expected: npm.pkg.github.com) ==="
+#           npm config get @priyagupta18:registry
+#         working-directory: frontend
+
+#       - name: Install
+#         run: npm install
+#         working-directory: frontend
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 name: Reproduce npmrc issue
 on: push
 jobs:
@@ -8,27 +44,5 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
-          registry-url: https://npm.pkg.github.com
-          scope: '@priyagupta18'          # ← matches your package.json name
-
-      - name: Debug - check config
-        run: |
-          echo "=== NPM_CONFIG_USERCONFIG ==="
-          cat $NPM_CONFIG_USERCONFIG
-          echo ""
-          echo "=== local .npmrc ==="
-          cat .npmrc 2>/dev/null || echo "No local .npmrc found"
-          echo ""
-          echo "=== default registry (expected: npmjs.org) ==="
-          npm config get registry
-          echo ""
-          echo "=== scoped registry (expected: npm.pkg.github.com) ==="
-          npm config get @priyagupta18:registry
-        working-directory: frontend
-
-      - name: Install
-        run: npm install
-        working-directory: frontend
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '24'
+      - run: npm i -g npm@12   # or npm@latest, or npm@12.0.2 to pin exactly
